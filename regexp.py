@@ -12,7 +12,6 @@ class ReChar(Re):
             return cont(idx+1)
         return False
 
-
 class ReSeq(Re):
     def __init__(self, first, second): self.first, self.second = first, second
     def match(self, str, idx, cont):
