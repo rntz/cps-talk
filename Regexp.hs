@@ -28,3 +28,11 @@ match (Star a) s k =
 
 matches :: Regexp -> String -> Bool
 matches a s = match a s null
+
+-- A more idiomatic implementation.
+match2 :: Regexp -> String -> (String -> Bool) -> Bool
+match2 (Char c) [] k = False
+match2 (Char c) (x:xs) k = c == x && k xs
+match2 (Seq a b) s k = match2 a s (\rest -> match2 b rest k)
+match2 (Or a b) s k = match2 a s k || match2 b s k
+match2 (Star a) s k = match2 a s (\rest -> match2 (Star a) rest k) || k s
