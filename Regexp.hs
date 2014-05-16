@@ -1,14 +1,13 @@
 module Regexp where
 
-data Regexp
-    = Char Char                 -- literal character
-    -- (Seq a b) represents concatenation /ab/
-    | Seq Regexp Regexp
-    -- (Or a b) represents choice /a|b/
-    | Or Regexp Regexp
-    -- (Star a) represents iteration /a*/
-    | Star Regexp
-      deriving (Show, Eq)
+data Regexp = Char Char -- literal character
+            -- (Seq a b) represents concatenation /ab/
+            | Seq Regexp Regexp
+            -- (Or a b) represents choice /a|b/
+            | Or Regexp Regexp
+            -- (Star a) represents iteration /a*/
+            | Star Regexp
+              deriving (Show, Eq)
 
 match :: Regexp -> String -> (String -> Bool) -> Bool
 match (Char c) [] k = False
